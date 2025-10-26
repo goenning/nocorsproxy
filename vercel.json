@@ -1,15 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "fluid": true,
-  "rewrites": [
-    {
-      "source": "/to/:path*",
-      "destination": "https://aptakube.com/:path*"
-    }
-  ],
   "headers": [
     {
-      "source": "/to/(.*)",
+      "source": "/api/proxy/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
