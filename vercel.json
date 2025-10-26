@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/to/:path*",
-      "destination": "https://:path*"
+      "destination": "https://aptakube.com/:path*"
     }
   ],
   "headers": [
