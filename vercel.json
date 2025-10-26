@@ -3,8 +3,8 @@
   "fluid": true,
   "rewrites": [
     {
-      "source": "/to/:path",
-      "destination": "https://:path"
+      "source": "/to/:path*",
+      "destination": "https://:path*"
     }
   ],
   "headers": [
@@ -22,6 +22,10 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "*"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "max-age=60"
         }
       ]
     }
