@@ -3,13 +3,13 @@
   "fluid": true,
   "rewrites": [
     {
-      "source": "/?url=(.*)",
+      "source": "/to/(.*)",
       "destination": "https://$1"
     }
   ],
   "headers": [
     {
-      "source": "/?url=(.*)",
+      "source": "/to/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
