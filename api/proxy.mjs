@@ -1,4 +1,9 @@
 export default async function handler(req, res) {
+  if (req.method === "OPTIONS") {
+    res.status(204).end();
+    return;
+  }
+
   const url = req.query.url;
 
   if (!url) {
