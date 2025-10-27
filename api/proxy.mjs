@@ -1,6 +1,8 @@
 import http from 'http';
 import https from 'https';
 
+export const runtime = 'nodejs';
+
 export default function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.status(204).end();
