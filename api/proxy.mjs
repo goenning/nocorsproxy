@@ -1,31 +1,31 @@
-export default async function handler(req, res) {
+import http from 'http';
+import https from 'https';
+
+export default function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.status(204).end();
     return;
   }
 
-  const url = req.query.url;
+  const targetUrl = req.query.url;
+  const isHttps = targetUrl.startsWith('https:');
 
-  if (!url) {
+  if (!targetUrl) {
     res.status(400).send("NOPE!");
     return;
   }
 
-  try {
-    const response = await fetch(url);
-    response.headers.forEach((value, key) => res.setHeader(key, value));
-    res.status(response.status);
-    response.body.pipeTo(
-      new WritableStream({
-        write(chunk) {
-          res.write(Buffer.from(chunk));
-        },
-        close() {
-          res.end();
-        },
-      })
-    );
-  } catch (err) {
-    res.status(500).send(err.message);
-  }
+  const proxyReq = (isHttps ? https : http).request({
+    method: "GET",
+  }, (proxyRes) => {
+    res.writeHead(proxyRes.statusCode, proxyRes.headers);
+    proxyRes.pipe(res, { end: true });
+  });
+  proxyReq.on('error', (err) => {
+    console.error('Proxy error:', err);
+    res.writeHead(502);
+    res.end('Bad gateway');
+  });
+
+  req.pipe(proxyReq, { end: true });
 }
