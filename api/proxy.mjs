@@ -4,6 +4,17 @@ import https from 'https';
 export const runtime = 'nodejs';
 
 export default function handler(req, res) {
+  const origin = req.headers.origin || req.headers.referer;
+  const isAllowed = !origin || 
+    origin.includes('localhost') || 
+    origin.includes('127.0.0.1') || 
+    origin.includes('seogets.com');
+  
+  if (!isAllowed) {
+    res.status(403).send("Forbidden");
+    return;
+  }
+
   if (req.method === "OPTIONS") {
     res.status(204).end();
     return;
