@@ -5,6 +5,7 @@ export const runtime = 'nodejs';
 
 export default function handler(req, res) {
   const origin = req.headers.origin || req.headers.referer;
+  console.log('Request origin:', origin);
   const isAllowed = !origin || 
     origin.includes('localhost') || 
     origin.includes('127.0.0.1') || 
