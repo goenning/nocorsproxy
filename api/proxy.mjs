@@ -15,7 +15,7 @@ export default function handler(req, res) {
     return;
   }
 
-  const proxyReq = (isHttps ? https : http).request({
+  const proxyReq = (isHttps ? https : http).request(targetUrl, {
     method: "GET",
   }, (proxyRes) => {
     res.writeHead(proxyRes.statusCode, proxyRes.headers);
