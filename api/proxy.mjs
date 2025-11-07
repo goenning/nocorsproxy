@@ -8,7 +8,8 @@ export default function handler(req, res) {
   const isAllowed = 
     origin.includes('localhost') || 
     origin.includes('127.0.0.1') || 
-    origin.includes('seogets.com');
+    origin.includes('seogets.com') ||
+    origin.includes('chrome-extension://pejnpfcinnpmlbicfekhhcmolijdchdi');
   
   if (!isAllowed) {
     res.status(403).send("Forbidden");
