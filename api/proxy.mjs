@@ -9,7 +9,8 @@ export default function handler(req, res) {
     origin.includes('localhost') || 
     origin.includes('127.0.0.1') || 
     origin.includes('seogets.com') ||
-    origin.includes('chrome-extension://pejnpfcinnpmlbicfekhhcmolijdchdi');
+    origin.includes('chrome-extension://pejnpfcinnpmlbicfekhhcmolijdchdi') || 
+    origin.includes('chrome-extension://hinjpjakcljiacadiaigbipnnhhhpgmm')
   
   if (!isAllowed) {
     res.status(403).send("Forbidden");
